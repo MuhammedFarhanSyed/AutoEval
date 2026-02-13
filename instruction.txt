@@ -1,0 +1,21 @@
+first run the env in python 3.10 version
+-->  py -3.10 -m venv myvenv
+activate the env through this 
+-->  .\myvenv\Scripts\Activate.ps1
+if requirements are not downloaded then run this to downloaded
+--> pip install -r requirments.txt
+install xampp
+-->open xampp and start the sql and apache 
+--> after starting click admin button in sql 
+it will open broswer and click the new button on lest side 
+--> in data base name field write  answer_evaluation
+--> keep the rest same and click create
+now come to terminal migrate the file through this command
+-->  python manage.py migrate
+after successfully complete start the server 
+-->python manage.py runserver
+after website is working connect the database of xampp to this folder sql file
+--> go to admin page created by xampp
+--> go to data base answer_evaluation which we created 
+--> under this click import and choose file location to this folder sql file and click import
+--> then all set 
