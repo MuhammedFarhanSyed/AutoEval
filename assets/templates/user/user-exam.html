@@ -2,256 +2,159 @@
 {% load static %}
 <html lang="en">
 <head>
-  <title>AI - Evaluatate  - A Descriptive Answers Evaluation - This is done using Using Cosine Similarity </title>
+  <title>Available Exams - AI AutoEval</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
-  
-  <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'user/fonts/icomoon/style.css' %}">
   <link href="{% static 'user/images/book.png' %}" rel="icon">
+  
   <link rel="stylesheet" href="{% static 'user/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'user/css/jquery-ui.css' %}">
-  <link rel="stylesheet" href="{% static 'user/css/owl.carousel.min.css' %}">
-  <link rel="stylesheet" href="{% static 'user/css/owl.theme.default.min.css' %}">
-  <link rel="stylesheet" href="{% static 'user/css/owl.theme.default.min.css' %}">
-  
-  <link rel="stylesheet" href="{% static 'user/css/jquery.fancybox.min.css' %}">
-  
-  <link rel="stylesheet" href="{% static 'user/css/bootstrap-datepicker.css' %}">
-  
-  <link rel="stylesheet" href="{% static 'user/fonts/flaticon/font/flaticon.css' %}">
-  
+  <link rel="stylesheet" href="{% static 'user/fonts/icomoon/style.css' %}">
   <link rel="stylesheet" href="{% static 'user/css/aos.css' %}">
-  
   <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'user/css/rating.css'%}">
+  <link rel="stylesheet" href="{% static 'user/css/modern-theme.css' %}">
+  
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-  
-  <style>
-    .navv{
-      background-color: #494e53;
-    }
-  </style>
-  
-  
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300"> 
 
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300"> 
 
   {% if messages %}
   {% for message in messages %}
   {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-  <script>swal({
-        title: "Success!",
-        text: "{{message}}",
-        icon: "success",
-        button: "OK",
+  <script>
+    swal({
+      title: "Success!",
+      text: "{{message}}",
+      icon: "success",
+      button: "OK",
     });
   </script>
-  
   {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-  <script>swal({
-        title: "Warning :)",
-        text: "{{message}}",
-        icon: "warning",
-        button: "OK",
+  <script>
+    swal({
+      title: "Warning :)",
+      text: "{{message}}",
+      icon: "warning",
+      button: "OK",
     });
   </script>
   {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
-  <script>swal({
-        title: "error :)",
-        text: "{{message}}",
-        icon: "error",
-        button: "OK",
+  <script>
+    swal({
+      title: "Notice :)",
+      text: "{{message}}",
+      icon: "info",
+      button: "OK",
     });
   </script>
   {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-  <script>swal({
-        title: "error :)",
-        text: "{{message}}",
-        icon: "error",
-        button: "OK",
+  <script>
+    swal({
+      title: "Error :)",
+      text: "{{message}}",
+      icon: "error",
+      button: "OK",
     });
   </script>
   {% endif %}
   {% endfor %}
   {% endif %}
 
-
-
-<style>
-  .thiscard {
-    width: 18rem;
-    box-shadow: 0px 0px 10px #ccc;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-</style>
-
-
   <div class="site-wrap">  
-    <div class="site-mobile-menu site-navbar-target">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle"></span>
-        </div>
-      </div>
-      <div class="site-mobile-menu-body"></div>
-    </div>
     
-    
-    <header class="site-navbar py-4 js-sticky-header navv site-navbar-target" role="banner"> 
-      <div class="container-fluid">
-        <div class="d-flex align-items-center">
-          <div class="site-logo mr-auto w-25"><a href="{% url 'user_dashboard' %}" >AI - Evaluation</a></div>
-          <div class="mx-auto text-center">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-              <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
-                <li><a href="{% url 'user_dashboard' %}" >Dashboard</a></li>
-                <li><a href="{% url 'user_exam' %}" class="">Exams</a></li>
-                <li><a href="{% url 'user_results' %}" class="">My Results</a></li>
-                <li><a href="{% url 'user_myprofile' %}" class="">My Profile</a></li>
-              </ul>
-            </nav>
+    <!-- Navbar Header -->
+    <header class="site-navbar py-3 js-sticky-header site-navbar-target" role="banner">      
+      <div class="container-fluid px-4">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="site-logo"><a href="{% url 'user_dashboard' %}">AI - AutoEval</a></div>
+          <nav class="site-navigation position-relative text-right" role="navigation">
+            <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block m-0 p-0">
+              <li><a href="{% url 'user_dashboard' %}">Dashboard</a></li>
+              <li><a href="{% url 'user_exam' %}" class="active">Exams</a></li>
+              <li><a href="{% url 'user_results' %}">My Results</a></li>
+              <li><a href="{% url 'user_myprofile' %}">My Profile</a></li>
+            </ul>
+          </nav>
+          <div class="d-none d-lg-block">
+            <a href="{% url 'index' %}" class="btn btn-outline-light btn-sm px-4 py-2">Sign Out</a>
           </div>
-          <div class="ml-auto w-25">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-              <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block m-0 p-0">
-                <li class="cta"><a href="{% url 'index' %}" class="nav-link"><span>Sign out</span></a></li>
-              </ul>
-            </nav>
-            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a>
-          </div>
+          <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a>
         </div>
-      </div>   
+      </div>  
     </header>
-    
-    
-    <div class="container pt-5">
-      <div class="container pt-5">
-        <h2 class="mt-5 text-center fw-bold text-dadrk">Select a subject you want to take an exam for.</h2><br><br>
-        <div class="row justify-content-around">
+
+    <!-- Header Section -->
+    <div class="intro-section hero-gradient pb-5" id="home-section">
+      <div class="container py-5">
+        <div class="row align-items-center mb-4">
+          <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+            <span class="badge-modern badge-grade-a mb-3">Academic Subjects</span>
+            <h1 class="display-4 font-weight-bold text-white mb-3">Select an Exam</h1>
+            <p class="lead text-light mb-0" style="color: #cbd5e1 !important;">
+              Choose a subject below to start your 5-question descriptive assessment.
+            </p>
+          </div>
+        </div>
+
+        <!-- Subject Cards Grid -->
+        <div class="row justify-content-center mt-4">
           {% for i in sub %}
-          <div class="col-lg-4">
-            <div class="thiscard" style="width: 18rem;">
-              <img class="card-img-top" src="media/{{i.subject_image}}" alt="Card image cap"
-                style="width: 286px;height: 150px;">
-              <div class="card-body">
-                <h5 class="card-title text-center">Take {{i.subject}} Exam Here!</h5>
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="glass-card text-dark h-100 overflow-hidden d-flex flex-column">
+              <div style="height: 180px; overflow: hidden; background: #e2e8f0;">
+                <img src="/media/{{i.subject_image}}" alt="{{i.subject}}" class="w-100 h-100" style="object-fit: cover; transition: transform 0.3s ease;">
               </div>
-              <hr>
-              <div class="card-body text-center">
-    
-                <a href="{% url 'user_questions' i.subject %}" class="btn btn-primary"
-                  style="background-color: #7971ea;">Start Exam</a>
+              <div class="p-4 d-flex flex-column flex-grow-1 justify-content-between text-center">
+                <div>
+                  <h4 class="font-weight-bold text-capitalize text-dark mb-2">{{i.subject}} Assessment</h4>
+                  <p class="text-muted small">5 Descriptive Questions &bull; Automated AI Scoring</p>
+                </div>
+                <div class="mt-4">
+                  <a href="{% url 'user_questions' i.subject %}" class="btn btn-gradient btn-block py-2 font-weight-bold">Start {{i.subject|title}} Exam</a>
+                </div>
               </div>
             </div>
-          </div><br>
+          </div>
+          {% empty %}
+          <div class="col-12 text-center py-5">
+            <div class="glass-card p-5">
+              <h4 class="text-muted">No exams available at the moment.</h4>
+              <p class="small text-muted mb-0">Please check back later or contact your administrator.</p>
+            </div>
+          </div>
           {% endfor %}
-          {% comment %} <div class="col-lg-3">
-            <div class="thiscard" style="width: 18rem;">
-              <img class="card-img-top" src="{% static 'user/subjects/phy.jpg' %}" alt="Card image cap"
-                style="width: 286px;height: 150px;">
-              <div class="card-body">
-                <h5 class="card-title text-center">Take Physics Exam Here!</h5>
-              </div>
-              <hr>
-              <div class="card-body text-center">
-    
-                <a href="{% url 'user_questions' 'physics' %}" class="btn btn-primary"
-                  style="background-color: #7971ea;">Start Exam</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="thiscard" style="width: 18rem;">
-              <img class="card-img-top" src="{% static 'user/subjects/chem.jpg' %}" alt="Card image cap"
-                style="width: 286px;height: 150px;">
-              <div class="card-body">
-                <h5 class="card-title text-center">Take Chemistry Exam!</h5>
-              </div>
-              <hr>
-              <div class="card-body text-center">
-    
-                <a href="{% url 'user_questions' 'chemistry' %}" class="btn btn-primary"
-                  style="background-color: #7971ea;">Start Exam</a>
-              </div>
-            </div>
-          </div> {% endcomment %}
-    
-          {% comment %}
-        </div><br><br>
-        <div class="row" style="margin-left: 29px;">
-          <div class="col-lg-3">
-            <div class="thiscard" style="width: 18rem;">
-              <img class="card-img-top" src="{% static 'user/subjects/soc.jpg' %}" alt="Card image cap"
-                style="width: 286px;height: 150px;">
-              <div class="card-body">
-                <h5 class="card-title text-center">Take Social Exam Here!</h5>
-              </div>
-              <hr>
-              <div class="card-body text-center">
-    
-                <a href="{% url 'user_questions' 'social' %}" class="btn btn-primary"
-                  style="background-color: #7971ea;">Start Exam</a>
-              </div>
-            </div>
-          </div>
-        </div> {% endcomment %}
+        </div>
+
       </div>
     </div>
-    
-    
-    
-    
-    
-    <footer class="footer-section foot bg-white mt-5">
-      <hr>      
+
+    <!-- Modern Footer -->
+    <footer class="footer-modern">
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
-            <h3>About codebook</h3>
-            <p>With an impressive list of highly qualified employees, our company is one of the most successful startups in Hyderabad.
-              There is a university of code called Codebook where you can search for any project title and download it without any hassle.</p>
-            </div>       
-            <div class="col-md-3 ml-auto">
-              <h3>Links</h3>
-              <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
-                <li><a href="{% url 'user_myprofile' %}" >Dashboard</a></li>
-                <li><a href="{% url 'user_exam' %}" >Exams</a></li>
-                <li><a href="{% url 'user_results' %}" >Results</a></li>
-                <li><a href="{% url 'user_myprofile' %}" class="">Myprofile</a></li>
-             </ul>
-            </div>
-            <p class="text-center">
-              Copyright All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://codebook.in/" target="codebook.in" >Codebook</a>
-            </p>         
+          <div class="col-md-5 mb-4">
+            <h3>AI AutoEval System</h3>
+            <p>Empowering students with real-time automated assessment and feedback.</p>
+          </div>
+          <div class="col-md-3 ml-auto mb-4">
+            <h3>Navigation</h3>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="{% url 'user_dashboard' %}">Dashboard</a></li>
+              <li class="mb-2"><a href="{% url 'user_exam' %}">Exams</a></li>
+              <li class="mb-2"><a href="{% url 'user_results' %}">My Results</a></li>
+              <li class="mb-2"><a href="{% url 'user_myprofile' %}">My Profile</a></li>
+            </ul>
           </div>
         </div>
-      </footer>
-      
-  
-    </div>
-    
-    <script src="{% static 'user/js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'user/js/jquery-migrate-3.0.1.min.js' %}"></script>
-    <script src="{% static 'user/js/jquery-ui.js' %}"></script>
-    <script src="{% static 'user/js/popper.min.js' %}"></script>
-    <script src="{% static 'user/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'user/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'user/js/jquery.stellar.min.js' %}"></script>
-    <script src="{% static 'user/js/jquery.countdown.min.js' %}"></script>
-    <script src="{% static 'user/js/bootstrap-datepicker.min.js' %}"></script>
-    <script src="{% static 'user/js/jquery.easing.1.3.js' %}"></script>
-    <script src="{% static 'user/js/aos.js' %}"></script>
-    <script src="{% static 'user/js/jquery.fancybox.min.js' %}"></script>
-    <script src="{% static 'user/js/jquery.sticky.js' %}"></script>
-    
-    <script src="{% static 'user/js/main.js' %}"></script>
-    
-    
-    
-  </body>
-  </html>
+        <hr style="border-color: rgba(255,255,255,0.1);">
+        <p class="text-center small mb-0">Copyright &copy; AutoEval System. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="{% static 'user/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'user/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'user/js/aos.js' %}"></script>
+  <script src="{% static 'user/js/main.js' %}"></script>
+</body>
+</html>

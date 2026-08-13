@@ -2,251 +2,195 @@
 {% load static %}
 <html lang="en">
 <head>
-  <title>AI - Evaluatate  - A Descriptive Answers Evaluation - This is done using Using Cosine Similarity </title>
+  <title>My Profile - AI AutoEval</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="{% static 'user/images/book.png' %}" rel="icon">
   
-  <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'user/fonts/icomoon/style.css' %}">
-  
   <link rel="stylesheet" href="{% static 'user/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'user/css/jquery-ui.css' %}">
-  <link rel="stylesheet" href="{% static 'user/css/owl.carousel.min.css' %}">
-  <link rel="stylesheet" href="{% static 'user/css/owl.theme.default.min.css' %}">
-  <link rel="stylesheet" href="{% static 'user/css/owl.theme.default.min.css' %}">
-  
-  <link rel="stylesheet" href="{% static 'user/css/jquery.fancybox.min.css' %}">
-  
-  <link rel="stylesheet" href="{% static 'user/css/bootstrap-datepicker.css' %}">
-  
-  <link rel="stylesheet" href="{% static 'user/fonts/flaticon/font/flaticon.css' %}">
-  
+  <link rel="stylesheet" href="{% static 'user/fonts/icomoon/style.css' %}">
   <link rel="stylesheet" href="{% static 'user/css/aos.css' %}">
-  
   <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
-  <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'user/css/modern-theme.css' %}">
+  
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  
-  <style>
-    .navv{
-      background-color: #494e53;
-    }
-  </style>
-  
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
-  {% csrf_token %}
   {% if messages %}
   {% for message in messages %}
   {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-  <script>swal({
-          title: "Successfull!",
-          text: "{{message}}",
-          icon: "success",
-          button: "OK",
-      });
+  <script>
+    swal({
+      title: "Success!",
+      text: "{{message}}",
+      icon: "success",
+      button: "OK",
+    });
   </script>
-  
   {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-  <script>swal({
-          title: "Warning :)",
-          text: "{{message}}",
-          icon: "warning",
-          button: "OK",
-      });
+  <script>
+    swal({
+      title: "Warning :)",
+      text: "{{message}}",
+      icon: "warning",
+      button: "OK",
+    });
   </script>
   {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
-  <script>swal({
-          title: "error :)",
-          text: "{{message}}",
-          icon: "error",
-          button: "OK",
-      });
+  <script>
+    swal({
+      title: "Notice :)",
+      text: "{{message}}",
+      icon: "info",
+      button: "OK",
+    });
   </script>
   {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-  <script>swal({
-          title: "error :)",
-          text: "{{message}}",
-          icon: "error",
-          button: "OK",
-      });
+  <script>
+    swal({
+      title: "Error :)",
+      text: "{{message}}",
+      icon: "error",
+      button: "OK",
+    });
   </script>
   {% endif %}
   {% endfor %}
   {% endif %}
 
   <div class="site-wrap">
-    <div class="site-mobile-menu site-navbar-target">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle"></span>
-        </div>
-      </div>
-      <div class="site-mobile-menu-body"></div>
-    </div>
     
-    
-    <header class="site-navbar py-4 js-sticky-header navv site-navbar-target" role="banner"> 
-      <div class="container-fluid">
-        <div class="d-flex align-items-center">
-          <div class="site-logo mr-auto w-25"><a href="{% url 'user_dashboard' %}">AI - Evaluation</a></div>
-          <div class="mx-auto text-center">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-              <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
-                <li><a href="{% url 'user_dashboard' %}" >Dashboard</a></li>
-                <li><a href="{% url 'user_exam' %}" class="">Exams</a></li>
-                <li><a href="{% url 'user_results' %}" class="">My Results</a></li>
-                <li><a href="{% url 'user_myprofile' %}" class="">My Profile</a></li>
-              </ul>
-            </nav>
+    <!-- Navbar Header -->
+    <header class="site-navbar py-3 js-sticky-header site-navbar-target" role="banner">      
+      <div class="container-fluid px-4">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="site-logo"><a href="{% url 'user_dashboard' %}">AI - AutoEval</a></div>
+          <nav class="site-navigation position-relative text-right" role="navigation">
+            <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block m-0 p-0">
+              <li><a href="{% url 'user_dashboard' %}">Dashboard</a></li>
+              <li><a href="{% url 'user_exam' %}">Exams</a></li>
+              <li><a href="{% url 'user_results' %}">My Results</a></li>
+              <li><a href="{% url 'user_myprofile' %}" class="active">My Profile</a></li>
+            </ul>
+          </nav>
+          <div class="d-none d-lg-block">
+            <a href="{% url 'index' %}" class="btn btn-outline-light btn-sm px-4 py-2">Sign Out</a>
           </div>
-          <div class="ml-auto w-25">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-              <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block m-0 p-0">
-                <li class="cta"><a href="{% url 'index' %}" class="nav-link"><span>Sign out</span></a></li>
-              </ul>
-            </nav>
-            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a>
-          </div>
+          <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a>
         </div>
-      </div>   
+      </div>  
     </header>
-    
-    
-    <section class="container pt-5 ml-5" >
-      
-      <div class="container pt-5" style="margin-left: 5%;">
-        <div class="container py-5">
-          <h1 class="text-dark text-center mb-5 text-decoration-underline mx-auto">Your Profile</h1>
-          <div class="row mx-auto justify-content-center">
-         
-            <div class="col-lg-4" >
-              <div class="card mb-4" style="background-color: #494e53;">
-                <form method="post" enctype="multipart/form-data" onsubmit='return loginvalidation();' name='myform' >
-                  {% csrf_token %}
-                <div class="card-body text-center">
-                  <img src="media/{{user.user_photo}}" alt="avatar" class="rounded-circle img-fluid mb-3" style="width: 150px;"><br>
-                  <label class="text-white text-center" for="">Profile Photo</label>
-                  <div class=" justify-content-center mb-2" style="margin-top: 10%;padding-bottom: 4%;">
-                    
-                  <input type="file" name="photo">
-                  
 
-    
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-8">
-              <div class="card mb-4" style="">
-                <div class="card-body text-white" style="border-radius: 4px;background-color: #494e53;">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <label for="">Full Name:</label><br>
-                      <input type="text" name="name" placeholder="ex. Upender Bala" value="{{user.user_name}}">
-                    </div>
-                    <div class="col-sm-6">
-                      <label for="">Email:</label><br>
-                      <input type="email" name="email" placeholder="ex. upender@gmail.com" value="{{user.user_email}}">
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <label for="">Contact:</label><br>
-                      <input type="number" name="contact" placeholder="ex. (+91)" value="{{user.user_contact}}">
-                    </div>
-                    <div class="col-lg-6">
-                      <label for="">Password:</label><br>
-                      <input type="password" name="password" placeholder="XXXXXXXXXX" value="{{user.user_password}}" readonly>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <label for="">Student Id:</label><br>
-                      <input type="text" placeholder="age" name="id" value="{{user.student_id}}"  readonly>
-                    </div>
-                    
-    
-    
-                  </div>
-    
-                
-                </div>
-              </div>
-            </div>
-            
+    <!-- Profile Hero Section -->
+    <div class="intro-section hero-gradient pb-5" id="home-section">
+      <div class="container py-5">
+        <div class="row align-items-center mb-4">
+          <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+            <span class="badge-modern badge-grade-a mb-3">Student Account</span>
+            <h1 class="display-4 font-weight-bold text-white mb-3">Profile Details</h1>
+            <p class="lead text-light mb-0" style="color: #cbd5e1 !important;">
+              View and update your personal student registration details.
+            </p>
           </div>
-          <div class="row justify-content-center">
-            <div class="col-lg-2">
-              
-              <button type="submit" class="btn btn-primary">Update Profile</button>
-              
+        </div>
+
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row justify-content-center mt-4">
+            
+            <!-- Avatar Card -->
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+              <div class="glass-card p-4 text-center text-dark h-100">
+                <div class="mb-3 position-relative d-inline-block">
+                  <img src="/media/{{user.user_photo}}" alt="avatar" class="rounded-circle shadow-sm img-fluid" style="width: 140px; height: 140px; object-fit: cover; border: 4px solid #ffffff;">
+                </div>
+                <h4 class="font-weight-bold mb-1">{{user.user_name}}</h4>
+                <p class="text-muted small mb-3">Student ID: {{user.student_id}}</p>
+                <div class="form-group mb-0 text-left">
+                  <label for="profilePhoto" class="small">Update Profile Picture</label>
+                  <input type="file" id="profilePhoto" name="photo" class="form-control form-control-modern">
+                </div>
+              </div>
             </div>
+
+            <!-- Details Form Card -->
+            <div class="col-lg-7 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="glass-card p-4 p-md-5 text-dark">
+                <h4 class="font-weight-bold text-dark mb-4 border-bottom pb-3">Personal Information</h4>
+                
+                <div class="form-row">
+                  <div class="col-md-6 form-group mb-3">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" class="form-control form-control-modern" value="{{user.user_name}}" required>
+                  </div>
+                  
+                  <div class="col-md-6 form-group mb-3">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-control form-control-modern" value="{{user.user_email}}" required>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-6 form-group mb-3">
+                    <label for="contact">Contact Number</label>
+                    <input type="number" id="contact" name="contact" class="form-control form-control-modern" value="{{user.user_contact}}" required>
+                  </div>
+
+                  <div class="col-md-6 form-group mb-3">
+                    <label for="student_id">Student ID</label>
+                    <input type="text" id="student_id" name="id" class="form-control form-control-modern" value="{{user.student_id}}" required>
+                  </div>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label for="password">Password</label>
+                  <input type="password" id="password" name="password" class="form-control form-control-modern" value="{{user.user_password}}" required>
+                </div>
+
+                <div class="mt-4">
+                  <button type="submit" class="btn btn-gradient px-5 py-3 font-weight-bold">Save Changes</button>
+                </div>
+              </div>
+            </div>
+
           </div>
         </form>
-        </div>
+
       </div>
-    </section>
-    
-    
-    
-    
-    
-    
-    <footer class="footer-section foot bg-white mt-5">
-      <hr>
+    </div>
+
+    <!-- Modern Footer -->
+    <footer class="footer-modern">
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
-            <h3>About codebook</h3>
-            <p>With an impressive list of highly qualified employees, our company is one of the most successful startups in Hyderabad.
-              
-              There is a university of code called Codebook where you can search for any project title and download it without any hassle.</p>
-            </div>              
-            <div class="col-md-3 ml-auto">
-              <h3>Links</h3>
-              <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
-                <li><a href="{% url 'user_myprofile' %}" >Dashboard</a></li>
-                <li><a href="{% url 'user_exam' %}" >Exams</a></li>
-                <li><a href="{% url 'user_results' %}" >Results</a></li>
-                <li><a href="{% url 'user_myprofile' %}" class="">Myprofile</a></li>
-             </ul>
-            </div>
-            <p class="text-center">
-              Copyright All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://codebook.in/" target="codebook.in" >Codebook</a>
-            </p>      
+          <div class="col-md-5 mb-4">
+            <h3>AI AutoEval System</h3>
+            <p>Empowering students with real-time automated assessment and feedback.</p>
+          </div>
+          <div class="col-md-3 ml-auto mb-4">
+            <h3>Navigation</h3>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="{% url 'user_dashboard' %}">Dashboard</a></li>
+              <li class="mb-2"><a href="{% url 'user_exam' %}">Exams</a></li>
+              <li class="mb-2"><a href="{% url 'user_results' %}">My Results</a></li>
+              <li class="mb-2"><a href="{% url 'user_myprofile' %}">My Profile</a></li>
+            </ul>
           </div>
         </div>
-      </footer>
-      
-      
-      
-      
-    </div> 
-    
-    <script src="{% static 'user/js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'user/js/jquery-migrate-3.0.1.min.js' %}"></script>
-    <script src="{% static 'user/js/jquery-ui.js' %}"></script>
-    <script src="{% static 'user/js/popper.min.js' %}"></script>
-    <script src="{% static 'user/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'user/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'user/js/jquery.stellar.min.js' %}"></script>
-    <script src="{% static 'user/js/jquery.countdown.min.js' %}"></script>
-    <script src="{% static 'user/js/bootstrap-datepicker.min.js' %}"></script>
-    <script src="{% static 'user/js/jquery.easing.1.3.js' %}"></script>
-    <script src="{% static 'user/js/aos.js' %}"></script>
-    <script src="{% static 'user/js/jquery.fancybox.min.js' %}"></script>
-    <script src="{% static 'user/js/jquery.sticky.js' %}"></script>
-    
-    
-    <script src="{% static 'user/js/main.js' %}"></script>
-    
-  </body>
-  </html>
+        <hr style="border-color: rgba(255,255,255,0.1);">
+        <p class="text-center small mb-0">Copyright &copy; AutoEval System. All rights reserved.</p>
+      </div>
+    </footer>
+  </div> 
+
+  <script src="{% static 'user/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'user/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'user/js/aos.js' %}"></script>
+  <script src="{% static 'user/js/main.js' %}"></script>
+</body>
+</html>
+
   
   
   

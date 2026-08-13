@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from adminapp.models import QuestionModel, SubjectModel
 from userapp.models import UserdetailsModel, AnswerModel, TempModel
-from userapp.text_similarity import text_similarity_nltk
+from userapp.text_similarity import text_similarity_nltk ,cosine_similarity_text
 
 # ==============================================================================
 # USER & AUTHENTICATION VIEWS MODULE
@@ -165,11 +165,11 @@ def user_questions(request, subject):
         q5 = request.POST.get('question6')
 
         # Compute NLTK NLP similarity score (0.0 to 1.0) and multiply by 20 marks
-        r1 = int((text_similarity_nltk(q1, sub[0].answer)) * 20)
-        r2 = int((text_similarity_nltk(q2, sub[1].answer)) * 20)
-        r3 = int((text_similarity_nltk(q3, sub[2].answer)) * 20)
-        r4 = int((text_similarity_nltk(q4, sub[3].answer)) * 20)
-        r5 = int((text_similarity_nltk(q5, sub[4].answer)) * 20)
+        r1 = int((text_similarity_nltk(q1, sub[0].answer)*0.5 +(cosine_similarity_text(q1,sub[0].answer)*0.5)) * 20)
+        r2 = int((text_similarity_nltk(q2, sub[1].answer)*0.5 +(cosine_similarity_text(q2 ,sub[1].answer)*0.5)) * 20)
+        r3 = int((text_similarity_nltk(q3, sub[2].answer)*0.5 +(cosine_similarity_text(q3,sub[2].answer)*0.5)) * 20)
+        r4 = int((text_similarity_nltk(q4, sub[3].answer)*0.5 +(cosine_similarity_text(q4,sub[3].answer)*0.5)) * 20)
+        r5 = int((text_similarity_nltk(q5, sub[4].answer)*0.5 +(cosine_similarity_text(q5,sub[4].answer)*0.5)) * 20)
 
         # Total score out of 100
         score = r1 + r2 + r3 + r4 + r5

@@ -2,156 +2,115 @@
 {% load static %}
 <html lang="en">
 <head>
-  <title>AI - Evaluatate  - A Descriptive Answers Evaluation - This is done using Using Cosine Similarity </title>
+  <title>AI Auto Evaluation System - Modern Descriptive Answer Assessment</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="{% static 'user/images/book.png' %}" rel="icon">
   
-  <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'user/fonts/icomoon/style.css' %}">
-  
+  <!-- Modern Google Fonts & Libraries -->
   <link rel="stylesheet" href="{% static 'user/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'user/css/jquery-ui.css' %}">
-  <link rel="stylesheet" href="{% static 'user/css/owl.carousel.min.css' %}">
-  <link rel="stylesheet" href="{% static 'user/css/owl.theme.default.min.css' %}">
-  <link rel="stylesheet" href="{% static 'user/css/owl.theme.default.min.css' %}">
-  
-  <link rel="stylesheet" href="{% static 'user/css/jquery.fancybox.min.css' %}">
-  
-  <link rel="stylesheet" href="{% static 'user/css/bootstrap-datepicker.css' %}">
-  
-  <link rel="stylesheet" href="{% static 'user/fonts/flaticon/font/flaticon.css' %}">
-  
+  <link rel="stylesheet" href="{% static 'user/fonts/icomoon/style.css' %}">
   <link rel="stylesheet" href="{% static 'user/css/aos.css' %}">
-  
   <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
-  
+  <!-- Custom Modern Design System -->
+  <link rel="stylesheet" href="{% static 'user/css/modern-theme.css' %}">
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
   <div class="site-wrap">
-    <div class="site-mobile-menu site-navbar-target">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle"></span>
-        </div>
-      </div>
-      <div class="site-mobile-menu-body"></div>
-    </div>
     
-                    <!-- header start -->
-
-    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">      
-      <div class="container-fluid">
-        <div class="d-flex align-items-center">
-          <div class="site-logo mr-auto w-25"><a href="{% url 'index' %}">AI - Evaluation</a></div>
-          <div class="mx-auto text-center">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-              <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
-                <li><a href="{% url 'index' %}" class="active">Home</a></li>
-                <li><a href="{% url 'user_login' %}" class="nav-link">Student</a></li>
-                <li><a href="{% url 'admin_login' %}" class="nav-link">Admin</a></li>
-                <li><a href="{% url 'user_contact' %}" class="nav-link">Contact</a></li>
-              </ul>
-            </nav>
+    <!-- Navbar Header -->
+    <header class="site-navbar py-3 js-sticky-header site-navbar-target" role="banner">      
+      <div class="container-fluid px-4">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="site-logo"><a href="{% url 'index' %}">AI - AutoEval</a></div>
+          <nav class="site-navigation position-relative text-right" role="navigation">
+            <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block m-0 p-0">
+              <li><a href="{% url 'index' %}" class="active">Home</a></li>
+              <li><a href="{% url 'user_login' %}">Student Portal</a></li>
+              <li><a href="{% url 'admin_login' %}">Admin Portal</a></li>
+              <li><a href="{% url 'user_contact' %}">Contact Us</a></li>
+            </ul>
+          </nav>
+          <div class="d-none d-lg-block">
+            <a href="{% url 'user_login' %}" class="btn btn-gradient btn-sm px-4 py-2">Sign In</a>
           </div>
-          <div class="ml-auto w-25">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-              <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block m-0 p-0">
-                <li class="cta"><a href="{% url 'user_login' %}" class=""><span>Login</span></a></li>
-              </ul>
-            </nav>
-            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a>
-          </div>
+          <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a>
         </div>
       </div>  
     </header>
-                  <!-- headrer end -->
-    
-                  <!-- section start -->
 
-    <div class="intro-section" id="home-section">    
-      <div class="slide-1" data-stellar-background-ratio="0.7">
-        <div class="container pt-5">
-          <div class="container pt-5">
-            <div class="row align-items-center">
-              <div class="col-12">
-                <div class="row align-items-center">
-                  <div class="col-12 mb-4 text-center mx-auto">
-                    <h1  data-aos="fade-up" data-aos-delay="100">Descriptive Answers Evaluation</h1>
-                    <p class="mb-4"  data-aos="fade-up" data-aos-delay="200">Online exams offer several benefits over traditional pen and paper assessments. They allow for increased flexibility in terms of time and location, as well as the ability to grade and analyze results immediately. This can save time and resources for both students and educators. Additionally, online exams can also include multimedia elements, such as videos and interactive simulations, which can enhance the overall learning experience. Answers assessments online provide a more accurate representation of students' understanding and can reduce the potential for cheating. Overall, online exams provide a convenient, efficient, and effective way to assess students' knowledge.Moreover, online exams can also track student progress and provide real-time feedback, helping to identify areas for improvement. In summary, online exams offer a range of benefits, from increased accessibility and efficiency to enhanced assessment accuracy and improved student engagement.
-
-                    </p>
-                  </div>
-                  <div class="col-lg-6 mb-4 text-center mx-auto mt-5">
-                      <h1  data-aos="fade-up" data-aos-delay="100">WE CARE</h1>
-                      <p class="mb-4"  data-aos="fade-up" data-aos-delay="200"> <span class="h3">"</span>In the end, exams are just a small part of your journey, what truly matters is the knowledge you gain and the person you become." ― Mohd Haseeb<span class="h3"></span></p>
-                  </div>
-                  <div class="col-12 mb-4 text-center mx-auto mt-3">
-                      <h1  data-aos="fade-up" data-aos-delay="100">Created By :</h1>
-                      <p class="mb-4 text-light"  data-aos="fade-up" data-aos-delay="200"><a href="https://codebook.in/" class="text-light" target="_blank">Codebook.in</a></p>
-                </div>
-                </div>
-              </div>               
+    <!-- Modern Hero Section -->
+    <div class="intro-section hero-gradient" id="home-section">    
+      <div class="container pt-5 pb-5">
+        <div class="row align-items-center my-5">
+          <div class="col-lg-8 mx-auto text-center">
+            <span class="badge-modern badge-grade-a mb-3">AI & NLP Powered Platform</span>
+            <h1 class="display-4 font-weight-bold text-white mb-4" data-aos="fade-up">Automated Descriptive Answer Evaluation</h1>
+            <p class="lead text-light mb-5" data-aos="fade-up" data-aos-delay="100" style="color: #cbd5e1 !important;">
+              Experience fast, consistent, and intelligent grading. Powered by Natural Language Processing to accurately evaluate student responses against reference model answers.
+            </p>
+            <div class="d-flex justify-content-center gap-3" data-aos="fade-up" data-aos-delay="200">
+              <a href="{% url 'user_login' %}" class="btn btn-gradient btn-lg mr-3">Student Login</a>
+              <a href="{% url 'admin_login' %}" class="btn btn-outline-light btn-lg" style="border-radius: 8px;">Faculty Login</a>
             </div>
           </div>
         </div>
+
+        <!-- Glassmorphism Feature Grid -->
+        <div class="row mt-5 pt-3">
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="glass-card p-4 text-dark text-center h-100">
+              <div class="stat-icon mx-auto mb-3"><i class="icon-book-open"></i></div>
+              <h4>Descriptive Grading</h4>
+              <p class="text-muted small">Tokenized NLP algorithms compare semantic word similarity and context accurately.</p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="glass-card p-4 text-dark text-center h-100">
+              <div class="stat-icon mx-auto mb-3" style="color: #10b981; background: rgba(16,185,129,0.1);"><i class="icon-clock-o"></i></div>
+              <h4>Instant Evaluation</h4>
+              <p class="text-muted small">Immediate score calculation out of 100 with automated letter grade assignments.</p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="glass-card p-4 text-dark text-center h-100">
+              <div class="stat-icon mx-auto mb-3" style="color: #0ea5e9; background: rgba(14,165,233,0.1);"><i class="icon-bar-chart"></i></div>
+              <h4>Graphical Analytics</h4>
+              <p class="text-muted small">Visual distribution charts and performance history tracking for educators.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-                  <!-- section end-->
 
-      
-                  <!-- footer start -->
-
-      <footer class="footer-section foot bg-white mt-5">
-        <hr>
-        
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
-              <h3>About codebook</h3>
-              <p>With an impressive list of highly qualified employees, our company is one of the most successful startups in Hyderabad.
-                
-                There is a university of code called Codebook where you can search for any project title and download it without any hassle.</p>
-            </div>
-              
-            <div class="col-md-3 ml-auto">
-                <h3>Links</h3>
-                <ul class="list-unstyled footer-links">
-                  <li><a href="{% url 'index' %}">Home</a></li>
-                  <li><a href="{% url 'user_login' %}">Student</a></li>
-                  <li><a href="{% url 'admin_login' %}">Admin</a></li>
-                  <li><a href="{% url 'user_contact' %}">Contact Us</a></li>
-                </ul>
-            </div>
-              <p class="text-center">
-                Copyright All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://codebook.in/" target="codebook.in" >Codebook</a>
-              </p> 
+    <!-- Modern Footer -->
+    <footer class="footer-modern">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 mb-4">
+            <h3>AI AutoEval System</h3>
+            <p>Empowering educators and students with intelligent NLP-assisted descriptive answer evaluation.</p>
+          </div>
+          <div class="col-md-3 ml-auto mb-4">
+            <h3>Quick Links</h3>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="{% url 'index' %}">Home</a></li>
+              <li class="mb-2"><a href="{% url 'user_login' %}">Student Portal</a></li>
+              <li class="mb-2"><a href="{% url 'admin_login' %}">Admin Portal</a></li>
+              <li class="mb-2"><a href="{% url 'user_contact' %}">Contact Us</a></li>
+            </ul>
           </div>
         </div>
-      </footer>
-        
-                  <!-- footer end -->
-        
-        
-        
+        <hr style="border-color: rgba(255,255,255,0.1);">
+        <p class="text-center small mb-0">Copyright &copy; AutoEval System. All rights reserved.</p>
       </div>
-      
-      <script src="{% static 'user/js/jquery-3.3.1.min.js' %}"></script>
-      <script src="{% static 'user/js/jquery-migrate-3.0.1.min.js' %}"></script>
-      <script src="{% static 'user/js/jquery-ui.js' %}"></script>
-      <script src="{% static 'user/js/popper.min.js' %}"></script>
-      <script src="{% static 'user/js/bootstrap.min.js' %}"></script>
-      <script src="{% static 'user/js/owl.carousel.min.js' %}"></script>
-      <script src="{% static 'user/js/jquery.stellar.min.js' %}"></script>
-      <script src="{% static 'user/js/jquery.countdown.min.js' %}"></script>
-      <script src="{% static 'user/js/bootstrap-datepicker.min.js' %}"></script>
-      <script src="{% static 'user/js/jquery.easing.1.3.js' %}"></script>
-      <script src="{% static 'user/js/aos.js' %}"></script>
-      <script src="{% static 'user/js/jquery.fancybox.min.js' %}"></script>
-      <script src="{% static 'user/js/jquery.sticky.js' %}"></script>
-      
-      
-      <script src="{% static 'user/js/main.js' %}"></script>
-      
-    </body>
-    </html>
+    </footer>
+  </div>
+
+  <script src="{% static 'user/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'user/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'user/js/aos.js' %}"></script>
+  <script src="{% static 'user/js/main.js' %}"></script>
+</body>
+</html>

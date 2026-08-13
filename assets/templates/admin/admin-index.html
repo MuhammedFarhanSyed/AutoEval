@@ -1,57 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
 {% load static %}
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link href="{% static 'admin/images/book.png' %}" rel="icon">
-  <title>AI - Evaluatate  - A Descriptive Answers Evaluation - This is done using Using Cosine Similarity </title>
+  <link href="{% static 'user/images/book.png' %}" rel="icon">
+  <title>Admin Dashboard - AI AutoEval</title>
+  
   <link href="{% static 'admin/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
   <link href="{% static 'admin/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
   <link href="{% static 'admin/css/ruang-admin.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'user/css/modern-theme.css' %}">
+  
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
 </head>
 
 <body id="page-top">
 
-  {% csrf_token %}
   {% if messages %}
   {% for message in messages %}
   {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-  <script>swal({
-          title: "Successfull!",
-          text: "{{message}}",
-          icon: "success",
-          button: "OK",
-      });
+  <script>
+    swal({
+      title: "Success!",
+      text: "{{message}}",
+      icon: "success",
+      button: "OK",
+    });
   </script>
-
   {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-  <script>swal({
-          title: "Warning :)",
-          text: "{{message}}",
-          icon: "warning",
-          button: "OK",
-      });
+  <script>
+    swal({
+      title: "Warning :)",
+      text: "{{message}}",
+      icon: "warning",
+      button: "OK",
+    });
   </script>
   {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
-  <script>swal({
-          title: "error :)",
-          text: "{{message}}",
-          icon: "error",
-          button: "OK",
-      });
+  <script>
+    swal({
+      title: "Notice :)",
+      text: "{{message}}",
+      icon: "info",
+      button: "OK",
+    });
   </script>
   {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-  <script>swal({
-          title: "error :)",
-          text: "{{message}}",
-          icon: "error",
-          button: "OK",
-      });
+  <script>
+    swal({
+      title: "Error :)",
+      text: "{{message}}",
+      icon: "error",
+      button: "OK",
+    });
   </script>
   {% endif %}
   {% endfor %}
@@ -60,247 +62,175 @@
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="{% url 'admin_index' %}">
         <div class="sidebar-brand-icon">
-          <img src="{% static 'admin/images/book.png' %}">
+          <img src="{% static 'user/images/book.png' %}" style="width:30px;">
         </div>
-        <div class="sidebar-brand-text mx-3" style="font-size: small;">AI - Evaluation</div>
+        <div class="sidebar-brand-text mx-3 font-weight-bold" style="font-size: 1rem;">AI AutoEval</div>
       </a>
       <hr class="sidebar-divider my-0">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'admin_index' %}">
+        <a class="nav-link py-3" href="{% url 'admin_index' %}">
           <i class="fa fa-th-large"></i>
-          <span>Dashboard</span></a>
+          <span>Dashboard</span>
+        </a>
       </li>
       <hr class="sidebar-divider">
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#ManageUsers" aria-expanded="true"
-          aria-controls="collapseBootstrap">
-          <i class="fa fa-user"></i>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#ManageUsers" aria-expanded="true">
+          <i class="fa fa-users"></i>
           <span>Manage Users</span>
         </a>
-        <div id="ManageUsers" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+        <div id="ManageUsers" class="collapse" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{% url 'admin_pending' %}">Pending Users</a>
-            <a class="collapse-item" href="{% url 'admin_all' %}">All Users</a>
+            <a class="collapse-item" href="{% url 'admin_pending' %}">Pending Approvals</a>
+            <a class="collapse-item" href="{% url 'admin_all' %}">All Registered Users</a>
           </div>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap" aria-expanded="true"
-          aria-controls="collapseBootstrap">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap" aria-expanded="true">
           <i class="fa fa-pen"></i>
           <span>Examinations</span>
         </a>
-        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar"
-          aria-expanded="true">
+        <div id="collapseBootstrap" class="collapse" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{% url 'admin_add_subject' %}">Manage Subject</a>
-            <a class="collapse-item" href="{% url 'admin_add_question' %}">Add Questions</a>
+            <a class="collapse-item" href="{% url 'admin_add_subject' %}">Manage Subjects</a>
+            <a class="collapse-item" href="{% url 'admin_add_question' %}">Add Question Paper</a>
             <a class="collapse-item" href="{% url 'admin_manage_question' %}">Manage Questions</a>
           </div>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Sentiment" aria-expanded="true"
-          aria-controls="collapseBootstrap">
-          <i class="fa fa-signal"></i>
-          <span>Assessments</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Sentiment" aria-expanded="true">
+          <i class="fa fa-chart-pie"></i>
+          <span>Analytics</span>
         </a>
-        <div id="Sentiment" class="collapse " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+        <div id="Sentiment" class="collapse" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{% url 'admin_results' %}">Results</a>
-            <a class="collapse-item" href="{% url 'admin_analysis_graph' %}">Analysis Graph</a>
-    
+            <a class="collapse-item" href="{% url 'admin_results' %}">Student Results</a>
+            <a class="collapse-item" href="{% url 'admin_analysis_graph' %}">Grade Distribution</a>
           </div>
         </div>
       </li>
       <hr class="sidebar-divider">
     </ul>
-   
-    <!-- Sidebar -->
-    <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column bg-light">
       <div id="content">
+        
         <!-- TopBar -->
-        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow-sm px-4">
           <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
+            <i class="fa fa-bars text-primary"></i>
           </button>
+          <span class="font-weight-bold text-dark h5 mb-0">System Control Panel</span>
           <ul class="navbar-nav ml-auto">
             <div class="topbar-divider d-none d-sm-block"></div>
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="voterDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <img class="img-profile rounded-circle" src="{% static 'admin/img/boy.png' %}" style="max-width: 60px">
-                <span class="ml-2 d-none d-lg-inline text-white small">Admin</span>
+              <a class="nav-link dropdown-toggle" href="#" id="voterDropdown" role="button" data-toggle="dropdown">
+                <img class="img-profile rounded-circle mr-2" src="{% static 'admin/img/boy.png' %}" style="max-width: 40px">
+                <span class="d-none d-lg-inline text-dark font-weight-bold">Administrator</span>
               </a>
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="voterDropdown">
-               
-               
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'index' %}" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+                <a class="dropdown-item text-danger" href="{% url 'index' %}">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
+                  Sign Out
                 </a>
               </div>
             </li>
           </ul>
         </nav>
-        <!-- Topbar -->
 
         <!-- Container Fluid-->
-        <div class="container-fluid" id="container-wrapper">
+        <div class="container-fluid px-4" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <ol class="breadcrumb">
-              <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
-              <li class="breadcrumb-item active" aria-current="page">/ Dashboard</li>
-            </ol>
+            <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Admin Dashboard</h1>
+            <span class="badge-modern badge-grade-a">Live Statistics</span>
           </div>
 
-          <div class="row mb-3">
-            <!-- Earnings (Monthly) Card Example -->
+          <!-- Stats Grid Cards -->
+          <div class="row">
+            
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-s font-weight-bold text-uppercase mb-1">Pending Users</div>
-                      <div class="h4 mb-0 font-weight-bold text-gray-800 p-2">5{{pend}}</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                        
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-clock text-warning"></i>
-                    </div>
-                  </div>
+              <div class="stat-card border-0 shadow-sm" style="background: #ffffff;">
+                <div class="stat-icon" style="color: #f59e0b; background: rgba(245, 158, 11, 0.1);"><i class="fa fa-clock"></i></div>
+                <div>
+                  <div class="stat-val text-dark">{{pend}}</div>
+                  <div class="stat-lbl">Pending Approvals</div>
                 </div>
               </div>
             </div>
-            <!-- Earnings (Annual) Card Example -->
+
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-s font-weight-bold text-uppercase mb-1">All Users</div>
-                      <div class="h4 mb-0 font-weight-bold text-gray-800 p-2">{{all}}</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <!-- <i class="fas fa-shopping-cart fa-2x text-success"></i> -->
-                      <i class="fa fa-users text-primary"></i>
-                    </div>
-                  </div>
+              <div class="stat-card border-0 shadow-sm" style="background: #ffffff;">
+                <div class="stat-icon" style="color: #4f46e5; background: rgba(79, 70, 229, 0.1);"><i class="fa fa-users"></i></div>
+                <div>
+                  <div class="stat-val text-dark">{{all}}</div>
+                  <div class="stat-lbl">Total Students</div>
                 </div>
               </div>
             </div>
-            <!-- New voter Card Example -->
+
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-s font-weight-bold text-uppercase mb-1">Assessments</div>
-                      <div class="h4 mb-0 mr-3 font-weight-bold text-gray-800 p-2">{{ques}}</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fa fa-handshake text-success"></i>
-                    </div>
-                  </div>
+              <div class="stat-card border-0 shadow-sm" style="background: #ffffff;">
+                <div class="stat-icon" style="color: #10b981; background: rgba(16, 185, 129, 0.1);"><i class="fa fa-book"></i></div>
+                <div>
+                  <div class="stat-val text-dark">{{ques}}</div>
+                  <div class="stat-lbl">Subject Modules</div>
                 </div>
               </div>
             </div>
-            <!-- Pending Requests Card Example -->
+
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-s font-weight-bold text-uppercase mb-1">Examinations</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800 p-2">{{ans}}</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <!-- <i class="fas fa-comments fa-2x text-warning"></i> -->
-                      <i class="fa fa-comments text-info"></i>
-                    </div>
-                  </div>
+              <div class="stat-card border-0 shadow-sm" style="background: #ffffff;">
+                <div class="stat-icon" style="color: #0ea5e9; background: rgba(14, 165, 233, 0.1);"><i class="fa fa-file-alt"></i></div>
+                <div>
+                  <div class="stat-val text-dark">{{ans}}</div>
+                  <div class="stat-lbl">Exams Submitted</div>
                 </div>
               </div>
             </div>
+
           </div>
-          <!--Row-->
-          <!-- Modal Logout -->
-          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                  <a href="{% url 'index' %}" class="btn btn-primary">Logout</a>
-                </div>
+
+          <!-- Quick Action Panels -->
+          <div class="row mt-4">
+            <div class="col-lg-6 mb-4">
+              <div class="glass-card p-4 text-dark h-100">
+                <h4 class="font-weight-bold mb-3"><i class="fa fa-user-check text-primary mr-2"></i>User Approval Queue</h4>
+                <p class="text-muted small mb-4">Review pending student registrations and grant system privileges.</p>
+                <a href="{% url 'admin_pending' %}" class="btn btn-gradient px-4 font-weight-bold">View Pending Requests ({{pend}})</a>
+              </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+              <div class="glass-card p-4 text-dark h-100">
+                <h4 class="font-weight-bold mb-3"><i class="fa fa-chart-pie text-success mr-2"></i>Performance Insights</h4>
+                <p class="text-muted small mb-4">Analyze automated cosine similarity grading distributions across subjects.</p>
+                <a href="{% url 'admin_analysis_graph' %}" class="btn btn-outline-primary px-4 font-weight-bold" style="border-radius: 8px;">View Grade Graph &rarr;</a>
               </div>
             </div>
           </div>
 
         </div>
-        <!---Container Fluid-->
       </div>
+
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+      <footer class="sticky-footer bg-white mt-auto">
         <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>copyright &  developed by
-              <b><a href="https://codebook.in/" target="_blank">Codebook</a></b>
-            </span>
+          <div class="copyright text-center my-auto small text-muted">
+            Copyright &copy; AI AutoEval System. All rights reserved.
           </div>
         </div>
       </footer>
-      <!-- Footer -->
     </div>
   </div>
-
-  <!-- Scroll to top -->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
 
   <script src="{% static 'admin/vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'admin/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'admin/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
   <script src="{% static 'admin/js/ruang-admin.min.js' %}"></script>
-  <script src="{% static 'admin/vendor/chart.js/Chart.min.js' %}"></script>
-  <script src="{% static 'admin/js/demo/chart-area-demo.js' %}"></script>  
-</body>
-</html>
-{% comment %} </html>0, 18], [2, 8], [4, 5], [6, 13],[8,5], [10,7],[12,4], [14,6],[16,15], [18, 9],[20,17], [22,7],[24,4], [26,9],[28,11]],
-                bars: {
-                    show: true,
-                    lineWidth: 0,
-                    fillColor: '#ffffff8a'
-                }
-            }], {
-                grid: {
-                    show: false
-                }
-            });
-            // Bar Chart #flotBarChart End
-        }); {% endcomment %}
-    </script>
 </body>
 </html>
