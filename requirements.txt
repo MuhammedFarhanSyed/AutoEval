@@ -19,7 +19,7 @@ colorama==0.4.6
 cryptography==50.0.0
 dataclasses-json==0.6.7
 distro==1.9.0
-Django==4.1.6
+Django==4.2
 django-cors-headers==4.9.0
 djangorestframework==3.15.2
 faiss-cpu==1.12.0
