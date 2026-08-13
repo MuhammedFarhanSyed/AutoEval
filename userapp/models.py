@@ -51,7 +51,7 @@ class AnswerModel(models.Model):
     """
     answer_id = models.AutoField(primary_key=True)
     answer_subject = models.CharField(verbose_name='Subject', max_length=50, blank=False, null=False)
-    answer = models.CharField(verbose_name='Answer', max_length=20000, null=True, blank=True)
+    answer = models.TextField(verbose_name='Answer', null=True, blank=True)
     user_id = models.ForeignKey(UserdetailsModel, on_delete=models.CASCADE, related_name='Examinee', null=True)
     score = models.IntegerField(blank=False, null=True)
     grade = models.CharField(verbose_name='Grade', max_length=100, blank=False, null=True)
@@ -74,9 +74,10 @@ class TempModel(models.Model):
     """
     answer_id = models.AutoField(primary_key=True)
     subject = models.CharField(verbose_name='Subject', max_length=50, blank=False, null=False)
-    question = models.CharField(verbose_name='Question', max_length=20000, null=True, blank=True)
-    answer = models.CharField(verbose_name='Answer', max_length=20000, null=True, blank=True)
+    question = models.TextField(verbose_name='Question', null=True, blank=True)
+    answer = models.TextField(verbose_name='Answer', null=True, blank=True)
     score = models.CharField(max_length=200, blank=False, null=True)
 
     class Meta:
-        db_table = 'temp_model'  # Custom database table name in MySQL
+        db_table = 'temp_model'  # Custom database table name in MySQL
+

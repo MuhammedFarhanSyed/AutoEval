@@ -298,24 +298,70 @@ label {
   border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
-/* Page Header & Intro Section */
+/* Page Header & Intro Section - Landing Page Overrides */
+.intro-section {
+  height: auto !important;
+  min-height: 100vh !important;
+  position: relative !important;
+  padding-top: 110px !important;
+  padding-bottom: 80px !important;
+}
+
+.intro-section, .intro-section .container > .row {
+  height: auto !important;
+  min-height: unset !important;
+}
+
 .hero-gradient {
-  background: var(--dark-bg-gradient);
-  color: #ffffff;
-  padding: 80px 0 60px 0;
-  border-radius: 0 0 30px 30px;
+  background: radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 60%), linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+  color: #ffffff !important;
+  border-radius: 0 0 40px 40px !important;
+}
+
+/* Sticky Navbar Override */
+.sticky-wrapper {
+  position: relative !important;
+  z-index: 1000 !important;
+  width: 100% !important;
+}
+
+.site-navbar {
+  background: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+}
+
+.hero-gradient .glass-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3) !important;
+}
+
+.hero-gradient .glass-card h4 {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+
+.hero-gradient .glass-card p {
+  color: #475569 !important;
 }
 
 .footer-modern {
   background: #0f172a !important;
   color: #94a3b8 !important;
-  padding: 50px 0 30px 0 !important;
+  padding: 60px 0 30px 0 !important;
 }
 
 .footer-modern h3 {
   color: #ffffff !important;
-  font-size: 1.1rem !important;
+  font-size: 1.2rem !important;
   margin-bottom: 20px !important;
+  font-weight: 700 !important;
 }
 
 .footer-modern a {
