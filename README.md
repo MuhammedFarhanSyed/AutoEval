@@ -5,6 +5,7 @@ An AI-powered automated answer evaluation platform built with **Django** and **N
 ---
 
 ## 🚀 Features
+[deployed on](https://autoeval-87mw.onrender.com)
 
 - 👨‍🎓 **Student Portal**: Account registration, login, interactive exam interface, score overview, and question-by-question result breakdown.
 - 👨‍🏫 **Admin / Faculty Portal**: Admin dashboard, student registration approval (`accept`/`decline`), subject creation, and question paper setup with model reference answers.

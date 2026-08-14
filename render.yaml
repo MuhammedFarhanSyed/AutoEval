@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: ai-autoeval
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn answer_evaluation.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DB_ENGINE
+        value: django.db.backends.mysql
